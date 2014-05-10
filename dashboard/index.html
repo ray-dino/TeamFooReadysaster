@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Typhoon Alert</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+
+    <span class="label label-success" id="id-label"></span>
+    <div class="row">
+    <div id="map-canvas" class="span9" style="width:800px;height:800px;"></div>
+
+    <div class="span3">
+        <form id="id-message-form">
+            <fieldset>
+                <legend>Message</legend>
+            <label>Typhoon Name: <input name="name" /></label>
+            <label>
+                Signal Number
+                <select name="signal_no">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </label>
+            <label>ETA:<input id="datepicker" name="eta" /></label>
+            <label>Message: <input name="message" /></label>
+
+            <input id="id-form-submit" type="button" class="btn btn-success" value="Send Alert" />
+            </fieldset>
+        </form>
+    </div>
+    </div>
+
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6l2y3xvy_0Z3RdktQCSP5mGqm9Q1qEGM&libraries=drawing&sensor=false"></script>
+    <script type="text/javascript" src="/static/jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/jquery-ui-1.10.4/js/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    var geoJson;
+    $(function() {
+        $("#datepicker").datepicker();
+
+        getMTSAT();
+
+        $("#id-form-submit").click(function() {
+            var formData = $("#id-message-form").serialize();
+
+            $.post(
+                "http://readysaster.azurewebsites.net/api/AlertManagementApi/?"+formData,
+                geoJson,
+                "json"
+            ).done(success);
+        });
+    });
+
+    function success() {
+        $("#id-label").html("Your alerts have been sent.");
+    }
+
+    function getMTSAT() {
+
+    }
+
+    function initialize() {
+        var mapDiv = document.getElementById("map-canvas");
+        var mapOptions = {
+            center: new google.maps.LatLng(12.375, 121.5),
+            zoom: 6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(mapDiv, mapOptions);
+
+        var drawingManager = new google.maps.drawing.DrawingManager({
+            drawingMode: null,
+            drawingControl: true,
+            drawingControlOptions: {
+                position: google.maps.ControlPosition.TOP_CENTER,
+                drawingModes: [
+                    google.maps.drawing.OverlayType.POLYGON,
+                ]
+            }
+        });
+        drawingManager.setMap(map);
+
+        google.maps.event.addListener(drawingManager, 'polygoncomplete', function(polygon) {
+            var path = polygon.getPath();
+            geoJson = convertToGeojson(path);
+            // $('#id-polygon-data').val(geoJson);
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    function convertToGeojson(path) {
+        var coords = [];
+        var xy = [];
+        for (var i=0; i<path.j.length; i++) {
+            xy = [path.j[i]['k'], path.j[i]['A']];
+            coords.push(xy);
+        }
+        coords.push([path.j[0]['k'], path.j[0]['A']]);
+        return {
+            "type": "Polygon", 
+            "coordinates": [coords]
+        };
+    }
+    </script>
+</body>
+</html>
