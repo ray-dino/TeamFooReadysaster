@@ -17,7 +17,7 @@
                 <legend>Message</legend>
             <label>Typhoon Name: <input name="name" /></label>
             <label>
-                Signal Number
+                Signal Number:
                 <select name="signal_no">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -38,16 +38,15 @@
     <script type="text/javascript" src="/static/jquery/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/static/jquery-ui-1.10.4/js/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+
     <script type="text/javascript">
     var geoJson;
     $(function() {
         $("#datepicker").datepicker();
 
-        getMTSAT();
-
         $("#id-form-submit").click(function() {
             var formData = $("#id-message-form").serialize();
-
             $.post(
                 "http://readysaster.azurewebsites.net/api/AlertManagementApi/?"+formData,
                 geoJson,
@@ -60,15 +59,11 @@
         $("#id-label").html("Your alerts have been sent.");
     }
 
-    function getMTSAT() {
-
-    }
-
     function initialize() {
         var mapDiv = document.getElementById("map-canvas");
         var mapOptions = {
             center: new google.maps.LatLng(12.375, 121.5),
-            zoom: 6,
+            zoom: 5,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(mapDiv, mapOptions);
@@ -90,8 +85,44 @@
             geoJson = convertToGeojson(path);
             // $('#id-polygon-data').val(geoJson);
         });
+
+        getMTSAT(map);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+
+    function getMTSAT(map) {
+        // Can't access Project NOAH API due to Same Origin Policy
+        // console.log("getting mtsast");
+        // $.get(
+        //     "http://202.90.153.89/api/mtsat",
+        //     getMTSATDone,
+        //     "json"
+        // );
+        data = [{"url": "http://climatex.dost.gov.ph/img/IR_rbow5.png", "verbose_name": "MTSAT", "extent": [99.6, 2.5, 148.2, 26.9], "size": [674, 337]}, {"url": "http://climatex.dost.gov.ph/img/IRWV5.png", "verbose_name": "Processed MTSAT", "extent": [99.6, 2.5, 148.2, 26.9], "size": [674, 337]}, {"url": "http://climatex.dost.gov.ph/img/VIS5.png", "verbose_name": "MTSAT VIS", "extent": [99.6, 2.5, 148.2, 26.9], "size": [1112, 556]}];
+        getMTSATDone(map, data);
+    }
+
+    function getMTSATDone(map, data) {
+        // var source = Proj4js.Proj('EPSG:4236'); 
+        var mtsatUrl, coords;
+        for (var i=0; i<data.length; i++) {
+            if (data[i].verbose_name == "MTSAT") {
+                mtsatUrl = data[i].url;
+                coords = data[i].extent;
+            }
+        }
+        console.log(mtsatUrl);
+
+        // proj4('EPSG:4326', 'EPSG:3857', coords);
+
+        var imageBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(2.3, 101.0),
+            new google.maps.LatLng(27.85, 148.7)
+        );
+
+        var mtsatOverlay = new google.maps.GroundOverlay(mtsatUrl, imageBounds, {opacity: 0.3});
+        mtsatOverlay.setMap(map);
+    }
 
     function convertToGeojson(path) {
         var coords = [];
