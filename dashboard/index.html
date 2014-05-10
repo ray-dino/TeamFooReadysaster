@@ -7,7 +7,6 @@
 </head>
 <body>
 
-    <span class="label label-success" id="id-label"></span>
     <div class="row">
         <div id="map-canvas" class="span9" style="width:800px;height:800px;"></div>
 
@@ -28,6 +27,8 @@
                 <label>Message: <input name="message" /></label>
 
                 <input id="id-form-submit" type="button" class="btn btn-success" value="Send Alert" />
+                <span class="label label-success" id="id-label"></span>
+
                 </fieldset>
             </form>
             <input id="id-toggle-overlay" type="button" class="btn btn-primary" value="Toggle Overlay" mode="show" />
@@ -48,11 +49,21 @@
 
         $("#id-form-submit").click(function() {
             var formData = $("#id-message-form").serialize();
-            $.post(
-                "http://readysaster.azurewebsites.net/api/AlertManagementApi/?"+formData,
-                geoJson,
-                "json"
-            ).done(success);
+            // $.post(
+            //     "http://readysaster.azurewebsites.net/api/AlertManagementApi/?"+formData,
+            //     geoJson,
+            //     "json"
+            // ).done(success);
+            $.support.cors = true;
+            this.xhr = $.ajax({
+                crossDomain: true,
+                type: "POST",
+                url: "https://readysaster.azurewebsites.net/api/AlertSubscriptionApi?"+formData,
+                headers: {
+                    "content-Type": "application/json",
+                },
+                data: geoJson
+            }).done(success);
         });
 
         $("#id-toggle-overlay").click(function() {
