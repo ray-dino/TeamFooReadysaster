@@ -57,7 +57,6 @@ function initialize() {
     google.maps.event.addListener(drawingManager, 'polygoncomplete', function(polygon) {
         var path = polygon.getPath();
         geoJson = convertToGeojson(path);
-        // $('#id-polygon-data').val(geoJson);
     });
 
     getMTSAT(map);
@@ -66,12 +65,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 function getMTSAT() {
     // Can't access Project NOAH API due to Same Origin Policy
-    // console.log("getting mtsast");
-    // $.get(
-    //     "http://202.90.153.89/api/mtsat",
-    //     getMTSATDone,
-    //     "json"
-    // );
+    // this.xhr = $.ajax({
+    //     crossDomain: true,
+    //     type: "GET",
+    //     url: "http://202.90.153.89/api/mtsat",
+    //     headers: {
+    //         "content-Type": "application/json",
+    //     }
+    // }).done(getMTSATDone);
     data = [{"url": "http://climatex.dost.gov.ph/img/IR_rbow5.png", "verbose_name": "MTSAT", "extent": [99.6, 2.5, 148.2, 26.9], "size": [674, 337]}, {"url": "http://climatex.dost.gov.ph/img/IRWV5.png", "verbose_name": "Processed MTSAT", "extent": [99.6, 2.5, 148.2, 26.9], "size": [674, 337]}, {"url": "http://climatex.dost.gov.ph/img/VIS5.png", "verbose_name": "MTSAT VIS", "extent": [99.6, 2.5, 148.2, 26.9], "size": [1112, 556]}];
     getMTSATDone(data);
 }
