@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+<script type="text/javascript">
+    window.appInsights={queue:[],applicationInsightsId:null,accountId:null,appUserId:null,configUrl:null,start:function(n){function u(n,t){n[t]=function(){var i=arguments;n.queue.push(function(){n[t].apply(n,i)})}}function f(n){var t=document.createElement("script");return t.type="text/javascript",t.src=n,t.async=!0,t}function r(){i.appendChild(f("//az416426.vo.msecnd.net/scripts/ai.0.js"))}var i,t;this.applicationInsightsId=n;u(this,"logEvent");u(this,"logPageView");i=document.getElementsByTagName("script")[0].parentNode;this.configUrl===null?r():(t=f(this.configUrl),t.onload=r,t.onerror=r,i.appendChild(t));this.start=function(){}}};
+
+    appInsights.configUrl="/ApplicationInsights.axd";
+appInsights.start();
+    appInsights.logPageView();
+</script></head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        @RenderSection("SPAViews", required: false)
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Scripts", required: false)
+    <script>
+        //window.alert("foo");
+        //$.post("https://readysaster.azurewebsites.net/api/AlertSubscriptionApi", {
+        //    "id": "503eebe5-fa88-40f8-b888-a5458a6ad493",
+        //    "currentLocation": {
+        //        "latitude": 1.1,
+        //        "longitude": 2.1
+        //    },
+        //    "addressString": "sample string 1",
+        //    "validUntil": "2014-05-10T15:29:34.7032309+00:00"
+        //}).done(function () { window.alert("bar") })
+
+        $.support.cors = true;
+        this.xhr = $.ajax({
+            crossDomain: true,
+            type: "POST",
+            url: "https://readysaster.azurewebsites.net/api/AlertSubscriptionApi",
+            headers: {
+                "accept": "image/png",
+                "content-Type": "application/json",
+            },
+            data: {
+                "id": "503eebe5-fa88-40f8-b888-a5458a6ad493",
+                "currentLocation": {
+                    "latitude": 1.1,
+                    "longitude": 2.1
+                },
+                "addressString": "sample string 1",
+                "validUntil": "2014-05-10T15:29:34.7032309+00:00"
+            }
+        }).done(function (data) {
+            window.alert("FOO");
+        });
+    </script>
+</body>
+</html>

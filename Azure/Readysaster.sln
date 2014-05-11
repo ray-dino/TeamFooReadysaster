@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30324.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Readysaster.DAL.EF", "Readysaster.DAL.EF\Readysaster.DAL.EF.csproj", "{BCD1D536-3B8C-499C-BD79-3C3D9E6F9685}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Readysaster.SharedModels", "Readysaster.SharedModels\Readysaster.SharedModels.csproj", "{4E3AB9F8-D386-4E05-8850-726475B909DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Readysaster.Web", "Readysaster.Web\Readysaster.Web.csproj", "{7FA463B3-CF36-45FD-B35D-3BDEE926F81D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Readysaster.Web.Tests", "Readysaster.Web.Tests\Readysaster.Web.Tests.csproj", "{AC30E52E-09D9-4286-AAC8-1BE831BD78E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E7598858-A8AE-46A0-856F-2B12BA5D7262}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCD1D536-3B8C-499C-BD79-3C3D9E6F9685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCD1D536-3B8C-499C-BD79-3C3D9E6F9685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCD1D536-3B8C-499C-BD79-3C3D9E6F9685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCD1D536-3B8C-499C-BD79-3C3D9E6F9685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E3AB9F8-D386-4E05-8850-726475B909DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E3AB9F8-D386-4E05-8850-726475B909DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E3AB9F8-D386-4E05-8850-726475B909DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E3AB9F8-D386-4E05-8850-726475B909DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FA463B3-CF36-45FD-B35D-3BDEE926F81D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA463B3-CF36-45FD-B35D-3BDEE926F81D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA463B3-CF36-45FD-B35D-3BDEE926F81D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA463B3-CF36-45FD-B35D-3BDEE926F81D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC30E52E-09D9-4286-AAC8-1BE831BD78E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC30E52E-09D9-4286-AAC8-1BE831BD78E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC30E52E-09D9-4286-AAC8-1BE831BD78E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC30E52E-09D9-4286-AAC8-1BE831BD78E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
