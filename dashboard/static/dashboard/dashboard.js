@@ -8,7 +8,7 @@ $(function() {
         this.xhr = $.ajax({
             crossDomain: true,
             type: "POST",
-            url: "https://readysaster.azurewebsites.net/api/AlertSubscriptionApi?"+formData,
+            url: "https://readysaster.azurewebsites.net/api/AlertManagementApi?"+formData,
             headers: {
                 "content-Type": "application/json",
             },

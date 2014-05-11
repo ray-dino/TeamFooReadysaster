@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RELAY Typhoon Alerts</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="#">RELAY</a>
+        </div>
+    </div>
+    <div class="row">
+        <span class="span12 label label-info">Drag the marker to your location</label>
+    </div>
+    <div class="row">
+        <div id="map-canvas" class="span9" style="width:800px;height:800px;"></div>
+
+        <div class="span3">
+            <form id="id-user-form">
+                <fieldset>
+                    <legend>User Details</legend>
+                <label>Address: <input id="id-address-field" name="addressString" /></label>
+                <label>Phone Number: <input id="id-phone-number-field" name="phoneNumber"/></label>
+                <label>Latitude: <input id="id-latitude-field" name="latitude" disabled/></label>
+                <label>Longitude: <input id="id-longitude-field" name="longitude" disabled/></label>
+
+                <input id="id-form-submit" type="button" class="btn btn-success" value="Send Alert" />
+                <span class="label label-success" id="id-label"></span>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6l2y3xvy_0Z3RdktQCSP5mGqm9Q1qEGM&libraries=drawing&sensor=false"></script>
+    <script type="text/javascript" src="/static/jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/jquery-ui-1.10.4/js/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/dashboard/location.js"></script>
+</body>
+</html>
